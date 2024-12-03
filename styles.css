@@ -1,0 +1,268 @@
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color:lightblue;
+}
+
+#vote {
+    position: absolute;
+    left: 60px;
+    bottom: 230px;
+    width: 260px;
+    height: 200px;
+    background-image: url('PaveVote.png'); /* Vaihda kuva tähän */
+    background-size: cover; /* Muuttaa kuvan koon niin, että se täyttää alueen */
+}
+
+    #game {
+        position: relative;
+        width: 500px;
+        height: 600px;
+        overflow: hidden;
+        background-color:lightblue;
+    }
+
+#cloud {
+    position: absolute;
+    bottom: 450px;
+    left: 0px;
+    width: 400px;
+    height: 250px;
+    background-image: url('clouds.png'); /* Vaihda kuva tähän */
+    background-size: cover; /* Muuttaa kuvan koon niin, että se täyttää alueen */
+}
+
+#player {
+    position: absolute;
+    left: 60px;
+    width: 60px; /* Pelaajan leveys */
+    height: 120px; /* Pelaajan korkeus */
+    background-image: url('Steve.png'); /* Vaihda kuva tähän */
+    background-size: cover;
+    bottom: 27; /* Pelaaja on maassa */
+}
+
+/* Tyylit esteille */
+.obstacle {
+    position: absolute;
+    width: 30px; /* Muutettu esteen leveys */
+    height: 30px; /* Muutettu esteen korkeus */
+    background-image: url('cstone1.png'); /* Vaihda kuva tähän */
+    background-size: cover;
+}
+
+.obstacle2 {
+    position: absolute;
+    width: 30px; /* Muutettu esteen leveys */
+    height: 30px; /* Muutettu esteen korkeus */
+    background-image: url('lava.png'); /* Vaihda kuva tähän */
+    background-size: cover;
+}
+
+.obstacle3 {
+    position: absolute;
+    bottom: 60px;
+    width: 30px; /* Muutettu esteen leveys */
+    height: 30px; /* Muutettu esteen korkeus */
+    background-image: url('cstone2.png'); /* Vaihda kuva tähän */
+    background-size: cover;
+}
+
+#ground {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    background-image: url('grass.png'); /* Vaihda kuva tähän */
+    background-size: cover; /* Muuttaa kuvan koon niin, että se täyttää alueen */
+}
+#ground1 {
+    position: absolute;
+    bottom: 0;
+    left: 30px;
+    width: 30px;
+    height: 30px;
+    background-image: url('grass.png'); /* Ensimmäinen palikka */
+    background-size: cover;
+}
+#ground2 {
+    position: absolute;
+    bottom: 0;
+    left: 60px;
+    width: 30px;
+    height: 30px; /* Siirrä toista palikkaa oikealle */
+    background-image: url('grass.png'); /* Toinen palikka */
+    background-size: cover;
+}
+#ground3 {
+    position: absolute;
+    bottom: 0;
+    left: 90px;
+    width: 30px;
+    height: 30px; /* Siirrä kolmatta palikkaa oikealle */
+    background-image: url('grass.png'); /* Kolmas palikka */
+    background-size: cover;
+}
+#ground4 {
+    position: absolute;
+    bottom: 0;
+    left: 120px;
+    width: 30px;
+    height: 30px; /* Siirrä kolmatta palikkaa oikealle */
+    background-image: url('grass.png'); /* Kolmas palikka */
+    background-size: cover;
+}#ground5 {
+    position: absolute;
+    bottom: 0;
+    left: 150px;
+    width: 30px;
+    height: 30px; /* Siirrä kolmatta palikkaa oikealle */
+    background-image: url('grass.png'); /* Kolmas palikka */
+    background-size: cover;
+}#ground6 {
+    position: absolute;
+    bottom: 0;
+    left: 180px;
+    width: 30px;
+    height: 30px; /* Siirrä kolmatta palikkaa oikealle */
+    background-image: url('grass.png'); /* Kolmas palikka */
+    background-size: cover;
+}#ground7 {
+    position: absolute;
+    bottom: 0;
+    left: 210px;
+    width: 30px;
+    height: 30px; /* Siirrä kolmatta palikkaa oikealle */
+    background-image: url('grass.png'); /* Kolmas palikka */
+    background-size: cover;
+}
+#ground8 {
+    position: absolute;
+    bottom: 0;
+    left: 240px;
+    width: 30px;
+    height: 30px;
+    background-image: url('grass.png'); /* Ensimmäinen palikka */
+    background-size: cover;
+}
+#ground9 {
+    position: absolute;
+    bottom: 0;
+    left: 270px;
+    width: 30px;
+    height: 30px; /* Siirrä toista palikkaa oikealle */
+    background-image: url('grass.png'); /* Toinen palikka */
+    background-size: cover;
+}
+#ground10 {
+    position: absolute;
+    bottom: 0;
+    left: 300px;
+    width: 30px;
+    height: 30px; /* Siirrä kolmatta palikkaa oikealle */
+    background-image: url('grass.png'); /* Kolmas palikka */
+    background-size: cover;
+}
+#ground11 {
+    position: absolute;
+    bottom: 0;
+    left: 330px;
+    width: 30px;
+    height: 30px; /* Siirrä kolmatta palikkaa oikealle */
+    background-image: url('grass.png'); /* Kolmas palikka */
+    background-size: cover;
+}#ground12 {
+    position: absolute;
+    bottom: 0;
+    left: 360px;
+    width: 30px;
+    height: 30px; /* Siirrä kolmatta palikkaa oikealle */
+    background-image: url('grass.png'); /* Kolmas palikka */
+    background-size: cover;
+}#ground13 {
+    position: absolute;
+    bottom: 0;
+    left: 390px;
+    width: 30px;
+    height: 30px; /* Siirrä kolmatta palikkaa oikealle */
+    background-image: url('grass.png'); /* Kolmas palikka */
+    background-size: cover;
+}#ground14 {
+    position: absolute;
+    bottom: 0;
+    left: 420px;
+    width: 30px;
+    height: 30px; /* Siirrä kolmatta palikkaa oikealle */
+    background-image: url('grass.png'); /* Kolmas palikka */
+    background-size: cover;
+}
+
+/* Box sizing and reset */
+*, ::before, ::after {
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0;
+}
+
+/* Font settings */
+html { 
+    font: 12pt 'Minecraftia', sans-serif; 
+}
+
+/* Body styling */
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #fff;
+    background-image: url('background.png');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Minecraft Style Button */
+.mc-button {
+    height: 30pt; /* Button height */
+    width: 300px; /* Button width */
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    user-select: none;
+    background: #999 url('https://i.ibb.co/rb2TWXL/bgbtn.png') center / cover;
+    image-rendering: pixelated;
+    border: 2px solid #000;
+    position: absolute; /* Aseta painike absoluuttiseksi */
+
+    /* Keskity pelialueen keskelle */
+    top: 70%; /* Aseta yläreuna keskelle */
+    left: 50%; /* Aseta vasen reuna keskelle */
+    transform: translate(-50%, -50%); /* Siirrä painike omaan keskikohtaansa */
+
+    /* Mouse over effects */
+    &:hover .title {
+        background-color: rgba(100, 100, 255, .45);
+        text-shadow: 2px 2px #202013CC;
+        color: #FFFFA0;
+    }
+    &:active .title {
+        box-shadow: inset -2px -4px #0004, inset 2px 2px #FFF5;
+    }
+
+    /* Button title styling */
+    .title {
+        width: 100%; 
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #DDD;
+        text-shadow: 2px 2px #000A;
+        box-shadow: inset -2px -4px #0006, inset 2px 2px #FFF7;
+    }
+}
