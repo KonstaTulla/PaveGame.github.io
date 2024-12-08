@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "Minecraft";
+    src: url('Minecraft.ttf') format('truetype'); /* tai format('woff') tai muu formaatti, jos käytät sellaista */
+}
+
 body {
     margin: 0;
     display: flex;
@@ -224,7 +229,7 @@ html {
 /* Body styling */
 body {
     height: 100vh;
-    display: flex;
+    display: auto;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -262,11 +267,6 @@ body {
     &:active .title {
         box-shadow: inset -2px -4px #0004, inset 2px 2px #FFF5;
     }
-
-    @font-face {
-        font-family: "Minecraft";
-        src: url('Minecraft.ttf');
-      }
 
     /* Button title styling */
     .title {

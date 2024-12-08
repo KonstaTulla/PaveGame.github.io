@@ -183,8 +183,9 @@ function resetPlayer() {
 }
 
 function startObstacleCreation() {
-    const minInterval = 3500; // Minimum interval for obstacle creation (ms)
-    const maxInterval = 9000; // Maximum interval for obstacle creation (ms)
+    let totalInterval = 0; // Muuttuja aikavälin summalle
+const minInterval = 500; // Esimerkki minimiarvo
+const maxInterval = 1500; // Esimerkki maksimiarvo
 
     function createObstacleWithRandomInterval() {
         createObstacles(); // Luo este
@@ -253,8 +254,8 @@ function startObstacleCreation() {
         const playerRect = player.getBoundingClientRect();
         
         // Määritä hitboxin offsetit
-        const leftOffset = 18.5;   // Voit säätää näitä arvoja tarpeen mukaan
-        const rightOffset = 18.5;  
+        const leftOffset = 19;   // Voit säätää näitä arvoja tarpeen mukaan
+        const rightOffset = 19;  
         const topOffset = 0;     
         const bottomOffset = 0;  
         
