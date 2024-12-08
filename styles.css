@@ -17,13 +17,21 @@ body {
     background-size: cover; /* Muuttaa kuvan koon niin, että se täyttää alueen */
 }
 
-    #game {
-        position: relative;
-        width: 500px;
-        height: 600px;
-        overflow: hidden;
-        background-color:lightblue;
-    }
+#game {
+    overflow: hidden;
+    display: none;
+    position: absolute; /* Aseta suhteellinen sijainti, jotta lapsielementit voivat käyttää tätä */
+    width: 400px; /* Pelialueen leveys */
+    height: 600px; /* Pelialueen korkeus */ /* Piilota kaikki, mikä ylittää pelialueen rajat */
+    background-color: lightblue; /* Taustaväri */
+    border: 2px solid #000000; /* Musta reuna pelialueelle */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Varjo pelialueelle */
+}
+
+#gameContainer {
+overflow: hidden;
+display: none;
+}
 
 #cloud {
     position: absolute;
@@ -228,6 +236,7 @@ body {
 
 /* Minecraft Style Button */
 .mc-button {
+    display: block;
     height: 30pt; /* Button height */
     width: 300px; /* Button width */
     cursor: pointer;
@@ -254,15 +263,49 @@ body {
         box-shadow: inset -2px -4px #0004, inset 2px 2px #FFF5;
     }
 
+    @font-face {
+        font-family: "Minecraft";
+        src: url('Minecraft.ttf');
+      }
+
     /* Button title styling */
     .title {
+        font: 12pt "Minecraft"; /* Poistettu ylimääräinen font-family */
         width: 100%; 
         height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
         color: #DDD;
+        text-size-adjust: auto; /* Oikea arvo */
         text-shadow: 2px 2px #000A;
         box-shadow: inset -2px -4px #0006, inset 2px 2px #FFF7;
     }
+}
+
+ /* Button title styling */
+ #title2 {
+    position: absolute;
+    bottom: 510px;
+    left: 850px;
+    font: 23pt "Minecraft"; /* Poistettu ylimääräinen font-family */
+    width: 160px; 
+    height: 30px;
+    color: #fffc4d;
+    text-shadow: 2px 2px #000A;
+    transform: rotate(-15deg); /* Kierrä teksti 45 astetta */
+    transition: transform 0.5s ease;
+}
+
+ /* Button title styling */
+ #title3 {
+    display: none;
+    position: absolute;
+    bottom: 300px;
+    font: 20pt "Minecraft"; /* Poistettu ylimääräinen font-family */
+    width: 270px; 
+    height: 30px;
+    justify-content: center;
+    color: #ffffff;
+    text-shadow: 2px 2px #000A;
 }
