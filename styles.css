@@ -309,3 +309,28 @@ body {
     color: #ffffff;
     text-shadow: 2px 2px #000A;
 }
+
+#title4 {
+    display: none;
+    position: absolute;
+    bottom: 330px;
+    font: 15pt "Minecraft"; /* Poistettu ylimääräinen font-family */
+    width: 270px; 
+    height: 30px;
+    justify-content: center;
+    color: #fffc4d;
+    text-shadow: 2px 2px #000A;
+}
+
+#title5 {
+    display: none;
+    position: absolute;
+    left: auto;
+    bottom: 330px;
+    font: 15pt "Minecraft"; /* Poistettu ylimääräinen font-family */
+    width: 270px; 
+    height: 30px;
+    justify-content: center;
+    color: #ffffff;
+    text-shadow: 2px 2px #000A;
+}

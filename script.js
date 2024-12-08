@@ -56,6 +56,16 @@ function showtitle3() {
     gameElement.style.display = 'block'; // Muuta display-arvo 'block':ksi
 }
 
+function showtitle4() {
+    const gameElement = document.getElementById('title4');
+    gameElement.style.display = 'block'; // Muuta display-arvo 'block':ksi
+}
+
+function showtitle5() {
+    const gameElement = document.getElementById('title4');
+    gameElement.style.display = 'block'; // Muuta display-arvo 'block':ksi
+}
+
 function startGame() {
     if (gameRunning) return; // Estä pelin käynnistäminen uudelleen
     gameRunning = true;
@@ -90,6 +100,8 @@ function endGame() {
     hidegame();
     hideGame2();
     showtitle3();
+    showtitle4();
+    showtitle5();
 }
 
 function resetObstacles() {
