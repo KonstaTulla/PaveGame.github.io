@@ -60,7 +60,9 @@ body {
 #game {
     overflow: hidden;
     display: none;
-    position: absolute; /* Aseta suhteellinen sijainti, jotta lapsielementit voivat käyttää tätä */
+    position: absolute;/* Aseta suhteellinen sijainti, jotta lapsielementit voivat käyttää tätä */
+    background-position: center;
+    bottom: 1%;
     width: 400px; /* Pelialueen leveys */
     height: 600px; /* Pelialueen korkeus */ /* Piilota kaikki, mikä ylittää pelialueen rajat */
     background-color: lightblue; /* Taustaväri */
