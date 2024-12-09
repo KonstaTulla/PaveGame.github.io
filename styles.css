@@ -2,17 +2,6 @@
     font-family: "Minecraft";
     src: url('Minecraft.ttf') format('truetype'); /* tai format('woff') tai muu formaatti, jos käytät sellaista */
 }
-
-body {
-    margin: 0;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color:lightblue;
-}
-
 #mlogo {
     position: absolute;
     display: flex;
@@ -253,11 +242,10 @@ html {
     font: 12pt 'Minecraftia', sans-serif; 
 }
 
-/* Body styling */
 body {
-    height: 100vh;
-    overflow: hidden;
-    display: auto;
+    height: 100vh; /* Varmista, että korkeus on 100% näkymästä */
+    overflow: hidden; /* Estä vieritys */
+    display: flex; /* Muuta display-arvo flexiksi */
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -266,16 +254,21 @@ body {
     background-size: cover;
     background-position: center;
 }
+
 @media (max-width: 600px) {
-    #mlogo {
-    position: absolute;
-    display: flex;
-    overflow: auto;
-    background-image: url('MLogo.png'); /* Ensure this path is correct */
-    background-size: contain; /* Adjust as needed */
-    background-repeat: no-repeat; /* Prevent the image from repeating */
-    background-position: center; /* Center the image within the element */
-    transform: translate(-50%, -50%); /* Adjust position to center */
+    #body {
+        position: absolute;
+        display: flex;
+        width: 70%; /* Säädä leveyttä, jotta se mahtuu näkymään */
+        height: auto; /* Anna korkeuden säätää automaattisesti */
+        max-height: 30%; /* Aseta maksimi korkeus, jotta se ei ylitä näkymää */
+        background-image: url('Background.jpg'); /* Varmista, että tämä polku on oikea */
+        background-size: contain; /* Säädä tarpeen mukaan */
+        background-repeat: no-repeat; /* Estä kuvan toistuminen */
+        background-position: center; /* Keskity kuva elementissä */
+        transform: translate(-50%, -50%); /* Säädä sijaintia keskelle */
+        top: 20%; /* Sijoita elementti haluttuun kohtaan */
+        left: 50%; /* Keskity horisontaalisesti */
     }
 }
 

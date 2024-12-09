@@ -215,8 +215,23 @@ function resetPlayer() {
     player.style.bottom = '27px'; // Palauta pelaaja maahan
 }
 
-function startObstacleCreation() { // Muuttuja aikavälin summalle
+function stopObstacleCreation() {
+    if (!isObstacleCreationRunning) {
+        console.log("Esteiden luonti ei ole käynnissä.");
+        return; // Lopetetaan, jos esteiden luonti ei ole käynnissä
+    }
 
+    clearInterval(obstacleCreationInterval); // Lopetetaan esteiden luonti
+    isObstacleCreationRunning = false; // Asetetaan lippu pois päältä
+    console.log("Esteiden luonti lopetettu.");
+}
+
+function stopObstacleCreation() {
+    clearInterval(obstacleInterval); // Lopetetaan esteiden luominen
+    console.log("Esteiden luominen lopetettu");
+}
+
+function startObstacleCreation() { // Muuttuja aikavälin summalle
     function createObstacle1() {
         const gameWidth = 400; // Pelialueen leveys
         const obstacleWidth = 30; // Esteen leveys
@@ -322,17 +337,16 @@ function startObstacleCreation() { // Muuttuja aikavälin summalle
 });
 }
 
-// Muokkaa moveObstacles-funktiota niin, että se kutsuu checkCollisions-funktiota
 function moveObstacles() {
-obstacles.forEach((obstacle, index) => {
-    obstacle.style.left = (parseInt(obstacle.style.left) - obstacleSpeed) + 'px'; // Liikutetaan esteitä vasemmalle
+    for (let index = obstacles.length - 1; index >= 0; index--) {
+        const obstacle = obstacles[index];
+        obstacle.style.left = (parseInt(obstacle.style.left) - obstacleSpeed) + 'px'; // Liikutetaan esteitä vasemmalle
 
-    // Tarkistetaan, onko este poistunut näkyvistä
-    if (parseInt(obstacle.style.left) < -30) { // Rajan tarkistus
-        obstacle.remove(); // Poistetaan este
-        obstacles.splice(index, 1); // Poistetaan este listasta
-    }
-});
+        // Tarkistetaan, onko este poistunut näkyvistä
+        if (parseInt(obstacle.style.left) < -30) { // Rajan tarkistus
+            obstacle.remove(); // Poistetaan este
+            obstacles.splice(index, 1); // Poistetaan este listasta
+        }}
 
 // Tarkista törmäykset pelaajan kanssa
 checkCollisions(player);
@@ -344,5 +358,6 @@ if (gameRunning) {
 
 // Aloita esteiden luonti ja liikkuminen heti pelin alussa
 startObstacleCreation();
-moveObstacles(); // Aloita esteiden liikkuminen
+moveObstacles();
+ // Aloita esteiden liikkuminen
 }
