@@ -6,6 +6,27 @@ const title = document.getElementById('title2');
 let scale = 1;
 let growing = true;
 
+let score = 0;
+let scoreInterval; // Muuttuja, johon tallennetaan setIntervalin palauttama ID
+let isGameRunning = false; // Muuttuja pelin tilan seuraamiseen
+
+// Funktio, joka lisää pisteitä
+function addScore(points) {
+    score += points;
+    document.getElementById('score').innerText = score;
+}
+
+// Lisää pisteitä joka sadas millisekunti
+setInterval(function() {
+    addScore(1); // Lisää 1 piste joka sadas millisekunti
+}, 100); // 100 millisekuntia = 0.1 sekuntia
+
+
+// Funktio, joka lopettaa score-laskurin
+function stopScoring() {
+    clearInterval(scoreInterval); // Lopeta pisteiden laskeminen
+}
+
 function animateText() {
     if (growing) {
         scale += 0.01; // Kasvata skaalausta
@@ -61,19 +82,21 @@ function showtitle4() {
     gameElement.style.display = 'block'; // Muuta display-arvo 'block':ksi
 }
 
-function showtitle5() {
-    const gameElement = document.getElementById('title4');
-    gameElement.style.display = 'block'; // Muuta display-arvo 'block':ksi
-}
 
 function startGame() {
     if (gameRunning) return; // Estä pelin käynnistäminen uudelleen
     gameRunning = true;
-    console.log('Peli käynnistetty!');
+    score = 0; // Nollaa pisteet
+    scoreInterval = setInterval(function() {
+        addScore(1); // Lisää 1 piste joka sadas millisekunti
+    }, 100); // 100 millisekuntia = 0.1 sekuntia
+    document.getElementById('score').innerText = score; // Päivitä näyttö
+    startButton.style.display = 'none'; // Piilotetaan "Aloita peli" -painike
     resetPlayer(); // Palauta pelaaja alkuasentoon
-    resetObstacles(); // Poista kaikki esteet
     startObstacleCreation(); // Aloitetaan esteiden luonti
+    startScoring(); // Aloita pisteiden laskeminen
     moveObstacles(); // Aloita esteiden liikkuminen
+    console.log('Peli käynnistetty!');
 }
 
 function resetPlayer() {
@@ -96,12 +119,12 @@ function endGame() {
     gameRunning = false; // Estä pelin jatkaminen
     startButton.style.display = 'block'; // Näytä "Aloita peli" -painike
     resetObstacles(); // Poista kaikki esteet
-    console.log("Peli päättynyt! Klikkaa 'Aloita peli' aloittaaksesi uudelleen.");
     hidegame();
     hideGame2();
     showtitle3();
     showtitle4();
-    showtitle5();
+    stopScoring();
+    console.log("Peli päättynyt! Klikkaa 'Aloita peli' aloittaaksesi uudelleen.");
 }
 
 function resetObstacles() {
@@ -197,11 +220,11 @@ function resetPlayer() {
 function startObstacleCreation() {
     let totalInterval = 0; // Muuttuja aikavälin summalle
 const minInterval = 500; // Esimerkki minimiarvo
-const maxInterval = 1500; // Esimerkki maksimiarvo
+const maxInterval = 2500; // Esimerkki maksimiarvo
 
     function createObstacleWithRandomInterval() {
         createObstacles(); // Luo este
-        const randomInterval = Math.floor(Math.random() * (maxInterval - minInterval)) + minInterval; // Satunnainen väli
+        const randomInterval = Math.floor(Math.random() * (maxInterval - minInterval)); // Satunnainen väli
         setTimeout(createObstacleWithRandomInterval, randomInterval); // Luo uusi este satunnaisessa ajassa
     }
 
@@ -301,6 +324,9 @@ const maxInterval = 1500; // Esimerkki maksimiarvo
         endGame(); // Lopeta peli törmäyksen sattuessa
     } else if (obstacle.className === 'obstacle2' && isCollisionWithObstacle2(obstacle, player)) {
         endGame(); // Lopeta peli törmäyksen sattuessa
+    }    if (isGameRunning) { // Tarkista, onko peli käynnissä
+        isGameRunning = false; // Aseta peli ei-käynnissä olevaksi
+        clearInterval(scoreInterval); // Lopeta pisteiden laskeminen
     }
 });
 }
