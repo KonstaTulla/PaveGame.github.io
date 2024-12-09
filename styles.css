@@ -12,6 +12,38 @@ body {
     background-color:lightblue;
 }
 
+#mlogo {
+    position: absolute;
+    display: flex;
+    top: 20%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    width: 50%; /* Use a percentage for responsive design */
+    height: 20%; /* Maintain aspect ratio */
+    background-image: url('MLogo.png'); /* Ensure this path is correct */
+    background-size: contain; /* Adjust as needed */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-position: center; /* Center the image within the element */
+    transform: translate(-50%, -50%); /* Adjust position to center */
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 600px) {
+    #mlogo {
+    position: absolute;
+    display: flex;
+    top: 20%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    width: 70%; /* Use a percentage for responsive design */
+    height: 30%; /* Maintain aspect ratio */
+    background-image: url('MLogo.png'); /* Ensure this path is correct */
+    background-size: contain; /* Adjust as needed */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-position: center; /* Center the image within the element */
+    transform: translate(-50%, -50%); /* Adjust position to center */
+       
+    }
+}
+
 #vote {
     position: absolute;
     left: 60px;
@@ -290,10 +322,10 @@ body {
 #title2 {
     position: absolute;
     display: flex;
-    bottom: 510px; /* Adjust this value for larger screens */
-    left: 850px; /* Adjust this value for larger screens */
-    font: 23pt "Minecraft"; /* Ensure the font is loaded */
-    width: 160px; 
+    bottom: 425px; /* Adjust this value for larger screens */
+    left: 680px; /* Adjust this value for larger screens */
+    font: 15pt "Minecraft"; /* Ensure the font is loaded */
+    width: 260px; 
     height: 30px;
     color: #fffc4d;
     text-shadow: 2px 2px #000A;
@@ -306,10 +338,10 @@ body {
 /* Adjustments for smaller screens */
 @media (max-width: 600px) {
     #title2 {
-        bottom: 460px; /* Adjust for smaller screens */
-        left: 85%; /* Center horizontally */
-        transform: translateX(-50%) rotate(-15deg); /* Center and rotate */
-        font: 18pt "Minecraft"; /* Optionally change font size */
+        bottom: 425px; /* Adjust for smaller screens */
+        left: 50%; /* Center horizontally */
+        transform: rotate(-15deg); /* Center and rotate */
+        font: 12pt "Minecraft"; /* Optionally change font size */
     }
 }
  /* Button title styling */
@@ -335,12 +367,4 @@ body {
     justify-content: center;
     color: #fffc4d;
     text-shadow: 2px 2px #000A;
-}
-
-#mlogo {
-    position: absolute;
-    background-image: url('MLogo.png');
-    display: block;
-    bottom: 400px; /* Adjust this value for larger screens */
-    left: 400px; /* Adjust this value for larger screens */
 }
