@@ -5,6 +5,7 @@
 
 body {
     margin: 0;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,12 +47,14 @@ body {
 
 #vote {
     position: absolute;
-    left: 60px;
-    bottom: 230px;
+    left: 50%;
+    bottom: 20%;
     width: 260px;
     height: 200px;
     background-image: url('PaveVote.png'); /* Vaihda kuva tähän */
     background-size: cover; /* Muuttaa kuvan koon niin, että se täyttää alueen */
+    background-position: center; /* Center the image within the element */
+    transform: translate(-50%, -50%); /* Adjust position to center */
 }
 
 #game {
@@ -338,7 +341,7 @@ body {
 /* Adjustments for smaller screens */
 @media (max-width: 600px) {
     #title2 {
-        bottom: 425px; /* Adjust for smaller screens */
+        bottom: 70%; /* Adjust for smaller screens */
         left: 50%; /* Center horizontally */
         transform: rotate(-15deg); /* Center and rotate */
         font: 12pt "Minecraft"; /* Optionally change font size */
