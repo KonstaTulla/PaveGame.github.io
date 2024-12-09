@@ -1,348 +1,377 @@
-const startButton = document.getElementById('startButton');
-const player = document.getElementById('player');
-const gameArea = document.getElementById('game');
-
-const title = document.getElementById('title2');
-let scale = 1;
-let growing = true;
-
-let score = 0;
-let scoreInterval; // Muuttuja, johon tallennetaan setIntervalin palauttama ID
-let isGameRunning = false; // Muuttuja pelin tilan seuraamiseen
-
-
-// Funktio, joka lisää pisteitä
-function addScore(points) {
-    score += points;
-    document.getElementById('score').innerText = score;
+@font-face {
+    font-family: "Minecraft";
+    src: url('Minecraft.ttf') format('truetype'); /* tai format('woff') tai muu formaatti, jos käytät sellaista */
 }
 
-// Funktio, joka aloittaa pisteiden lisäämisen
-function startScoring() {
-    scoreInterval = setInterval(function() {
-        addScore(1); // Lisää 1 piste joka sadas millisekunti
-    }, 100); // 
-    console.log('Score Start')
+body {
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color:lightblue;
 }
 
-// Funktio, joka lopettaa pisteiden lisäämisen
-function stopScoring() {
-        clearInterval(scoreInterval); // Lopeta pisteiden laskeminen
-        console.log('Score Stop')
+#mlogo {
+    position: absolute;
+    display: flex;
+    top: 20%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    width: 50%; /* Use a percentage for responsive design */
+    height: 20%; /* Maintain aspect ratio */
+    background-image: url('MLogo.png'); /* Ensure this path is correct */
+    background-size: contain; /* Adjust as needed */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-position: center; /* Center the image within the element */
+    transform: translate(-50%, -50%); /* Adjust position to center */
 }
 
-function resetScore() {
-    score = 0; // Nollaa pisteet
-    document.getElementById('score').innerText = score; // Päivitä näyttö
-    console.log('Score Reset'); // Tulosta konsoliin
-}
-
-function animateText() {
-    if (growing) {
-        scale += 0.01; // Kasvata skaalausta
-        if (scale >= 1.35) { // Kun skaalaus on 1.5, vaihda suuntaa
-            growing = false;
-        }
-    } else {
-        scale -= 0.01; // Vähennä skaalausta
-        if (scale <= 1) { // Kun skaalaus on 1, vaihda suuntaa
-            growing = true;
-        }
+/* Adjustments for smaller screens */
+@media (max-width: 600px) {
+    #mlogo {
+    position: absolute;
+    display: flex;
+    top: 20%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    width: 70%; /* Use a percentage for responsive design */
+    height: 30%; /* Maintain aspect ratio */
+    background-image: url('MLogo.png'); /* Ensure this path is correct */
+    background-size: contain; /* Adjust as needed */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-position: center; /* Center the image within the element */
+    transform: translate(-50%, -50%); /* Adjust position to center */
     }
-    title.style.transform = `rotate(-15deg) scale(${scale})`; // Aseta uusi skaalaus
-    requestAnimationFrame(animateText); // Kutsu funktiota uudelleen
 }
 
-// Aloita animaatio
-animateText();
-// Aloita peli, kun painetaan "Aloita peli" -painiketta
-let gameRunning = false;
-
-startButton.addEventListener('click', startGame);
-startButton.addEventListener('click', showGame);
-startButton.addEventListener('click', showGame2); // Nollaa pisteet)
-
-
-function showGame() {
-    const gameElement = document.getElementById('game');
-    gameElement.style.display = 'block'; // Muuta display-arvo 'block':ksi
+#vote {
+    position: absolute;
+    left: 50%;
+    bottom: 20%;
+    width: 260px;
+    height: 200px;
+    background-image: url('PaveVote.png'); /* Vaihda kuva tähän */
+    background-size: cover; /* Muuttaa kuvan koon niin, että se täyttää alueen */
+    background-position: center; /* Center the image within the element */
+    transform: translate(-50%, -50%); /* Adjust position to center */
 }
 
-function showGame2() {
-    const gameElement = document.getElementById('gameContainer');
-    gameElement.style.display = 'block'; // Muuta display-arvo 'block':ksi
+#game {
+    overflow: hidden;
+    display: none;
+    position: absolute;
+    background-position: center;
+    bottom: 1%;
+    width: 400px; /* Pelialueen leveys */
+    height: 600px; /* Pelialueen korkeus */ /* Piilota kaikki, mikä ylittää pelialueen rajat */
+    background-color: lightblue; /* Taustaväri */
+    border: 2px solid #000000; /* Musta reuna pelialueelle */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Varjo pelialueelle */
 }
 
-function hidegame() {
-    const gameElement = document.getElementById('game');
-    gameElement.style.display = 'none'; // Muuta display-arvo 'block':ksi
+#gameContainer {
+overflow: hidden;
+display: none;
 }
 
-function hideGame2() {
-    const gameElement = document.getElementById('gameContainer');
-    gameElement.style.display = 'none'; // Muuta display-arvo 'block':ksi
+#cloud {
+    position: absolute;
+    bottom: 450px;
+    left: 0px;
+    width: 400px;
+    height: 250px;
+    background-image: url('clouds.png'); /* Vaihda kuva tähän */
+    background-size: cover; /* Muuttaa kuvan koon niin, että se täyttää alueen */
 }
 
-function showtitle3() {
-    const gameElement = document.getElementById('title3');
-    gameElement.style.display = 'block'; // Muuta display-arvo 'block':ksi
+#player {
+    position: absolute;
+    left: 60px;
+    width: 60px; /* Pelaajan leveys */
+    height: 120px; /* Pelaajan korkeus */
+    background-image: url('Steve.png'); /* Vaihda kuva tähän */
+    background-size: cover;
+    bottom: 27; /* Pelaaja on maassa */
 }
 
-function showtitle4() {
-    const gameElement = document.getElementById('title4');
-    gameElement.style.display = 'block'; // Muuta display-arvo 'block':ksi
+/* Tyylit esteille */
+.obstacle {
+    position: absolute;
+    width: 30px; /* Muutettu esteen leveys */
+    height: 30px; /* Muutettu esteen korkeus */
+    background-image: url('cstone1.png'); /* Vaihda kuva tähän */
+    background-size: cover;
 }
 
-
-function startGame() {
-    if (gameRunning) return; // Estä pelin käynnistäminen uudelleen
-    gameRunning = true;
-    console.log('Peli käynnistetty!');
-
-    // Piilotetaan "Aloita peli" -painike
-    startButton.style.display = 'none'; 
-
-     // Nollaa pisteet
-     resetScore();
-
-    // Palauta pelaaja alkuasentoon
-    resetPlayer(); 
-
-    // Aloitetaan esteiden luonti
-    startObstacleCreation(); 
-
-    startScoring();
-
-    // Päivitä näyttö
-    document.getElementById('score').innerText = score; 
-
-    // Aloita esteiden liikkuminen
-    moveObstacles(); 
+.obstacle2 {
+    position: absolute;
+    width: 30px; /* Muutettu esteen leveys */
+    height: 30px; /* Muutettu esteen korkeus */
+    background-image: url('lava.png'); /* Vaihda kuva tähän */
+    background-size: cover;
 }
 
-function endGame() {
-    gameRunning = false; // Estä pelin jatkaminen
-    startButton.style.display = 'block'; // Näytä "Aloita peli" -painike
-    resetObstacles(); // Poista kaikki esteet
-    hidegame();
-    hideGame2();
-    showtitle3();
-    showtitle4();
-    stopScoring();
-    console.log("Game Over, Start");
+#ground {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    background-image: url('grass.png'); /* Vaihda kuva tähän */
+    background-size: cover; /* Muuttaa kuvan koon niin, että se täyttää alueen */
+}
+#ground1 {
+    position: absolute;
+    bottom: 0;
+    left: 30px;
+    width: 30px;
+    height: 30px;
+    background-image: url('grass.png'); /* Ensimmäinen palikka */
+    background-size: cover;
+}
+#ground2 {
+    position: absolute;
+    bottom: 0;
+    left: 60px;
+    width: 30px;
+    height: 30px; /* Siirrä toista palikkaa oikealle */
+    background-image: url('grass.png'); /* Toinen palikka */
+    background-size: cover;
+}
+#ground3 {
+    position: absolute;
+    bottom: 0;
+    left: 90px;
+    width: 30px;
+    height: 30px; /* Siirrä kolmatta palikkaa oikealle */
+    background-image: url('grass.png'); /* Kolmas palikka */
+    background-size: cover;
+}
+#ground4 {
+    position: absolute;
+    bottom: 0;
+    left: 120px;
+    width: 30px;
+    height: 30px; /* Siirrä kolmatta palikkaa oikealle */
+    background-image: url('grass.png'); /* Kolmas palikka */
+    background-size: cover;
+}#ground5 {
+    position: absolute;
+    bottom: 0;
+    left: 150px;
+    width: 30px;
+    height: 30px; /* Siirrä kolmatta palikkaa oikealle */
+    background-image: url('grass.png'); /* Kolmas palikka */
+    background-size: cover;
+}#ground6 {
+    position: absolute;
+    bottom: 0;
+    left: 180px;
+    width: 30px;
+    height: 30px; /* Siirrä kolmatta palikkaa oikealle */
+    background-image: url('grass.png'); /* Kolmas palikka */
+    background-size: cover;
+}#ground7 {
+    position: absolute;
+    bottom: 0;
+    left: 210px;
+    width: 30px;
+    height: 30px; /* Siirrä kolmatta palikkaa oikealle */
+    background-image: url('grass.png'); /* Kolmas palikka */
+    background-size: cover;
+}
+#ground8 {
+    position: absolute;
+    bottom: 0;
+    left: 240px;
+    width: 30px;
+    height: 30px;
+    background-image: url('grass.png'); /* Ensimmäinen palikka */
+    background-size: cover;
+}
+#ground9 {
+    position: absolute;
+    bottom: 0;
+    left: 270px;
+    width: 30px;
+    height: 30px; /* Siirrä toista palikkaa oikealle */
+    background-image: url('grass.png'); /* Toinen palikka */
+    background-size: cover;
+}
+#ground10 {
+    position: absolute;
+    bottom: 0;
+    left: 300px;
+    width: 30px;
+    height: 30px; /* Siirrä kolmatta palikkaa oikealle */
+    background-image: url('grass.png'); /* Kolmas palikka */
+    background-size: cover;
+}
+#ground11 {
+    position: absolute;
+    bottom: 0;
+    left: 330px;
+    width: 30px;
+    height: 30px; /* Siirrä kolmatta palikkaa oikealle */
+    background-image: url('grass.png'); /* Kolmas palikka */
+    background-size: cover;
+}#ground12 {
+    position: absolute;
+    bottom: 0;
+    left: 360px;
+    width: 30px;
+    height: 30px; /* Siirrä kolmatta palikkaa oikealle */
+    background-image: url('grass.png'); /* Kolmas palikka */
+    background-size: cover;
+}#ground13 {
+    position: absolute;
+    bottom: 0;
+    left: 390px;
+    width: 30px;
+    height: 30px; /* Siirrä kolmatta palikkaa oikealle */
+    background-image: url('grass.png'); /* Kolmas palikka */
+    background-size: cover;
+}#ground14 {
+    position: absolute;
+    bottom: 0;
+    left: 420px;
+    width: 30px;
+    height: 30px; /* Siirrä kolmatta palikkaa oikealle */
+    background-image: url('grass.png'); /* Kolmas palikka */
+    background-size: cover;
 }
 
-function resetObstacles() {
-    obstacles.forEach(obstacle => {
-        obstacle.remove(); // Poista este pelialueelta
-    });
-    obstacles = []; // Tyhjennä esteiden lista
+/* Box sizing and reset */
+*, ::before, ::after {
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0;
 }
 
- // Esimerkiksi voit aloittaa pelin logiikan, nollata pelaajan sijainnin jne.
- 
-
-// Törmäystarkistuksen kutsuminen
-function checkCollisions(player) {
-    obstacles.forEach(obstacle => {
-        if (obstacle.className === 'obstacle' && isCollisionWithObstacle1(obstacle, player)) {
-            endGame();
-             // Lopeta peli törmäyksen sattuessa
-        } else if (obstacle.className === 'obstacle2' && isCollisionWithObstacle2(obstacle, player)) {
-            endGame();
-            // Lopeta peli törmäyksen sattuessa
-        }
-    });
+/* Font settings */
+html { 
+    font: 12pt 'Minecraftia', sans-serif; 
 }
 
-let isJumping = false;
-let jumpHeight = 0;
-const maxJumpHeight = 170; // Maksimi hyppykorkeus
-const gravity = 7; // Painovoima, joka vetää pelaajan alas
-let jumpSpeed = 15; // Nopeus, jolla pelaaja hyppää
-let obstacleSpeed = 3.73; // Esteiden liikenopeus
-let obstacles = []; // Lista esteistä
-
-// Käynnistä peli, kun painetaan "Aloita peli" -painiketta
-startButton.addEventListener('click', startGame);
-// Lisää klikkikuuntelija pelialueelle, joka aktivoi hyppäyksen
-gameArea.addEventListener('click', function() {
-    if (gameRunning) {
-        jump(); // Suorita hyppy, jos peli on käynnissä
+/* Body styling */
+body {
+    height: 100vh;
+    overflow: hidden;
+    display: auto;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #fff;
+    background-image: url('Background.jpg');
+    background-size: cover;
+    background-position: center;
+}
+@media (max-width: 600px) {
+    #mlogo {
+    position: absolute;
+    display: flex;
+    overflow: auto;
+    background-image: url('MLogo.png'); /* Ensure this path is correct */
+    background-size: contain; /* Adjust as needed */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-position: center; /* Center the image within the element */
+    transform: translate(-50%, -50%); /* Adjust position to center */
     }
-});
-// Kuuntele hyppyä (esim. välilyönti)
-document.addEventListener('keydown', function(event) {
-    if (event.code === 'Space') { // Tarkista, onko painettu välilyöntiä
-        if (!gameRunning) {
-            startGame(); // Käynnistä peli
-        }
-        jump(); // Suorita hyppy
-    }
-});
-
-function jump() {
-    if (isJumping) return; // Estä hyppy, jos pelaaja on jo ilmassa
-    isJumping = true;
-    jumpHeight = 30; // Nollaa hyppykorkeus
-
-    const jumpInterval = setInterval(() => {
-        if (jumpHeight < maxJumpHeight) {
-            jumpHeight += jumpSpeed; // Nosta pelaajaa
-            player.style.bottom = `${jumpHeight}px`; // Aseta pelaajan sijainti
-        } else {
-            clearInterval(jumpInterval); // Lopeta ylös hyppääminen
-            fall(); // Aloita putoaminen
-        }
-    }, 20); // Hyppy kesto
 }
 
-function fall() {
-    const fallInterval = setInterval(() => {
-        if (jumpHeight > 37) {
-            jumpHeight -= gravity; // Vähennä hyppykorkeutta
-            player.style.bottom = `${jumpHeight}px`; // Aseta pelaajan sijainti
-        } else {
-            clearInterval(fallInterval); // Lopeta putoaminen
-            jumpHeight = 0; // Nollaa hyppykorkeus
-            isJumping = false; // Hyppy on valmis
-            resetPlayer(); // Palauta pelaaja maahan
-        }
-    }, 20); // Putoamisen kesto
+/* Minecraft Style Button */
+.mc-button {
+    display: block;
+    height: 30pt; /* Button height */
+    width: 300px; /* Button width */
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    user-select: none;
+    background: #999 url('https://i.ibb.co/rb2TWXL/bgbtn.png') center / cover;
+    image-rendering: pixelated;
+    border: 2px solid #000;
+    position: absolute; /* Aseta painike absoluuttiseksi */
+
+    /* Keskity pelialueen keskelle */
+    top: 70%; /* Aseta yläreuna keskelle */
+    left: 50%; /* Aseta vasen reuna keskelle */
+    transform: translate(-50%, -50%); /* Siirrä painike omaan keskikohtaansa */
+
+    /* Mouse over effects */
+    &:hover .title {
+        background-color: rgba(100, 100, 255, .45);
+        text-shadow: 2px 2px #202013CC;
+        color: #FFFFA0;
+    }
+    &:active .title {
+        box-shadow: inset -2px -4px #0004, inset 2px 2px #FFF5;
+    }
+
+    /* Button title styling */
+    .title {
+        font: 12pt "Minecraft"; /* Poistettu ylimääräinen font-family */
+        width: 100%; 
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #DDD;
+        text-size-adjust: auto; /* Oikea arvo */
+        text-shadow: 2px 2px #000A;
+        box-shadow: inset -2px -4px #0006, inset 2px 2px #FFF7;
+    }
 }
 
-function resetPlayer() {
-    player.style.bottom = '27px'; // Palauta pelaaja maahan
+
+
+/* Button title styling */
+#title2 {
+    position: absolute;
+    display: flex;
+    bottom: 70%; /* Adjust this value for larger screens */
+    left: 680px; /* Adjust this value for larger screens */
+    font: 15pt "Minecraft"; /* Ensure the font is loaded */
+    width: 260px; 
+    height: 30px;
+    color: #fffc4d;
+    text-shadow: 2px 2px #000A;
+    transform: rotate(-15deg); /* Rotate text */
+    transition: transform 0.5s ease;
+    justify-content: center; /* Center text horizontally */
+    align-items: center; /* Center text vertically */
 }
 
-function startObstacleCreation() { // Muuttuja aikavälin summalle
-
-    function createObstacle1() {
-        const gameWidth = 400; // Pelialueen leveys
-        const obstacleWidth = 30; // Esteen leveys
-        const obstacleHeight = 30; // Esteen korkeus
-    
-        // Luodaan div esteelle
-        const obstacle = document.createElement('div'); 
-        obstacle.className = 'obstacle'; // Asetetaan esteen tyyppi
-        obstacle.style.position = 'absolute';
-        obstacle.style.left = `${gameWidth}px`; // Asetetaan este oikeaan reunaan
-        obstacle.style.width = `${obstacleWidth}px`; // Asetetaan esteen leveys
-        obstacle.style.height = `${obstacleHeight}px`; // Asetetaan esteen korkeus
-        obstacle.style.bottom = '30px'; // Asetetaan obstacle1 28 pikseliä korkealle
-    
-        // Lisätään este pelialueelle ja esteiden listaan
-        gameArea.appendChild(obstacle);
-        obstacles.push(obstacle); // Lisätään este listaan
+/* Adjustments for smaller screens */
+@media (max-width: 600px) {
+    #title2 {
+        bottom: 70%; /* Adjust for smaller screens */
+        left: 50%; /* Center horizontally */
+        transform: rotate(-15deg); /* Center and rotate */
+        font: 12pt "Minecraft"; /* Optionally change font size */
     }
-    
-    function createObstacle2() {
-        const gameWidth = 400; // Pelialueen leveys
-        const obstacleWidth = 30; // Esteen leveys
-        const obstacleHeight = 30; // Esteen korkeus
-    
-        // Luodaan div esteelle
-        const obstacle = document.createElement('div'); 
-        obstacle.className = 'obstacle2'; // Asetetaan esteen tyyppi
-        obstacle.style.position = 'absolute';
-        obstacle.style.left = `${gameWidth}px`; // Asetetaan este oikeaan reunaan
-        obstacle.style.width = `${obstacleWidth}px`; // Asetetaan esteen leveys
-        obstacle.style.height = `${obstacleHeight}px`; // Asetetaan esteen korkeus
-        obstacle.style.bottom = '0px'; // Asetetaan obstacle2 maantasoon
-    
-        // Lisätään este pelialueelle ja esteiden listaan
-        gameArea.appendChild(obstacle);
-        obstacles.push(obstacle); // Lisätään este listaan
-    }
-    
-    function isCollisionWithObstacle1(obstacle1, player) {
-        const obstacleRect = obstacle1.getBoundingClientRect();
-        const playerRect = player.getBoundingClientRect();
-        
-        // Määritä hitboxin offsetit
-        const leftOffset = 18.5;   // Voit säätää näitä arvoja tarpeen mukaan
-        const rightOffset = 18.5;  
-        const topOffset = 7;     
-        const bottomOffset = 0;  
-        
-        return (
-            obstacleRect.left + leftOffset < playerRect.right &&
-            obstacleRect.right - rightOffset > playerRect.left &&
-            obstacleRect.top + topOffset < playerRect.bottom &&
-            obstacleRect.bottom - bottomOffset > playerRect.top
-        );
-    }
-    
-    function isCollisionWithObstacle2(obstacle2, player) {
-        const obstacle2Rect = obstacle2.getBoundingClientRect();
-        const playerRect = player.getBoundingClientRect();
-        
-        // Määritä hitboxin offsetit
-        const leftOffset = 19;   // Voit säätää näitä arvoja tarpeen mukaan
-        const rightOffset = 19;  
-        const topOffset = 0;     
-        const bottomOffset = 0;  
-        
-        return (
-            obstacle2Rect.left + leftOffset < playerRect.right &&
-            obstacle2Rect.right - rightOffset > playerRect.left &&
-            obstacle2Rect.top + topOffset < playerRect.bottom &&
-            obstacle2Rect.bottom - bottomOffset > playerRect.top
-        );
-    }
-    
-    // Esimerkki esteiden luomisesta ja törmäystarkistuksesta
-    function startObstacleCreation() {
-        const minInterval = 2000; // Minimum interval for obstacle creation (ms)
-        const maxInterval = 4500; // Maximum interval for obstacle creation (ms)
-    
-        function createObstacles() {
-            const randomType = Math.random() < 0.5 ? createObstacle1 : createObstacle2; // Satunnainen esteen tyyppi
-            randomType(); // Luo este
-            const randomInterval = Math.max(2000, Math.floor(Math.random() * (maxInterval - minInterval))); // Varmista, että väli on vähintään 2000
-            setTimeout(createObstacles, randomInterval); // Luo uusi este satunnaisessa ajassa
-        }
-    
-        createObstacles(); // Aloita esteiden luominen
-    }
-    
-    // Törmäystarkistuksen kutsuminen
-    function checkCollisions(player) {
-        obstacles.forEach(obstacle => {
-            if (obstacle.className === 'obstacle' && isCollisionWithObstacle1(obstacle, player)) {
-        endGame();
-             // Lopeta peli törmäyksen sattuessa
-    } else if (obstacle.className === 'obstacle2' && isCollisionWithObstacle2(obstacle, player)) {
-        endGame();
-             // Lopeta peli törmäyksen sattuessa
-    }    if (isGameRunning) { // Tarkista, onko peli käynnissä
-        isGameRunning = false; // Aseta peli ei-käynnissä olevaksi
-        clearInterval(scoreInterval); // Lopeta pisteiden laskeminen
-    }
-});
+}
+ /* Button title styling */
+ #title3 {
+    display: none;
+    position: absolute;
+    bottom: 300px;
+    font: 20pt "Minecraft"; /* Poistettu ylimääräinen font-family */
+    width: 270px; 
+    height: 30px;
+    justify-content: center;
+    color: #ffffff;
+    text-shadow: 2px 2px #000A;
 }
 
-// Muokkaa moveObstacles-funktiota niin, että se kutsuu checkCollisions-funktiota
-function moveObstacles() {
-obstacles.forEach((obstacle, index) => {
-    obstacle.style.left = (parseInt(obstacle.style.left) - obstacleSpeed) + 'px'; // Liikutetaan esteitä vasemmalle
-
-    // Tarkistetaan, onko este poistunut näkyvistä
-    if (parseInt(obstacle.style.left) < -30) { // Rajan tarkistus
-        obstacle.remove(); // Poistetaan este
-        obstacles.splice(index, 1); // Poistetaan este listasta
-    }
-});
-
-// Tarkista törmäykset pelaajan kanssa
-checkCollisions(player);
-
-if (gameRunning) {
-    requestAnimationFrame(moveObstacles); // Päivitetään esteiden sijainti seuraavassa ruudunpäivityksessä
-}
-}
-
-// Aloita esteiden luonti ja liikkuminen heti pelin alussa
-startObstacleCreation();
-moveObstacles(); // Aloita esteiden liikkuminen
+#title4 {
+    display: none;
+    position: absolute;
+    bottom: 330px;
+    font: 15pt "Minecraft"; /* Poistettu ylimääräinen font-family */
+    width: 270px; 
+    height: 30px;
+    justify-content: center;
+    color: #fffc4d;
+    text-shadow: 2px 2px #000A;
 }

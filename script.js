@@ -27,8 +27,8 @@ function startScoring() {
 
 // Funktio, joka lopettaa pisteiden lisäämisen
 function stopScoring() {
-    clearInterval(scoreInterval);
-    console.log('Score Stop'); // Lopeta pisteiden laskeminen
+        clearInterval(scoreInterval); // Lopeta pisteiden laskeminen
+        console.log('Score Stop')
 }
 
 function resetScore() {
@@ -36,9 +36,6 @@ function resetScore() {
     document.getElementById('score').innerText = score; // Päivitä näyttö
     console.log('Score Reset'); // Tulosta konsoliin
 }
-
-// Esimerkki kutsuista
-startScoring(); // Aloita pisteiden lisääminen
 
 function animateText() {
     if (growing) {
@@ -100,16 +97,27 @@ function showtitle4() {
 function startGame() {
     if (gameRunning) return; // Estä pelin käynnistäminen uudelleen
     gameRunning = true;
-    scoreInterval = setInterval(function() {
-        addScore(1); // Lisää 1 piste joka sadas millisekunti
-    }, 100); // 100 millisekuntia = 0.1 sekuntia
-    document.getElementById('score').innerText = score; // Päivitä näyttö
-    startButton.style.display = 'none'; // Piilotetaan "Aloita peli" -painike
-    resetPlayer(); // Palauta pelaaja alkuasentoon
-    startObstacleCreation(); // Aloitetaan esteiden luonti
-    startScoring(); // Aloita pisteiden laskeminen
-    moveObstacles(); // Aloita esteiden liikkuminen
-    console.log('Game Started Succefully');
+    console.log('Peli käynnistetty!');
+
+    // Piilotetaan "Aloita peli" -painike
+    startButton.style.display = 'none'; 
+
+     // Nollaa pisteet
+     resetScore();
+
+    // Palauta pelaaja alkuasentoon
+    resetPlayer(); 
+
+    // Aloitetaan esteiden luonti
+    startObstacleCreation(); 
+
+    startScoring();
+
+    // Päivitä näyttö
+    document.getElementById('score').innerText = score; 
+
+    // Aloita esteiden liikkuminen
+    moveObstacles(); 
 }
 
 function endGame() {
@@ -139,10 +147,10 @@ function checkCollisions(player) {
     obstacles.forEach(obstacle => {
         if (obstacle.className === 'obstacle' && isCollisionWithObstacle1(obstacle, player)) {
             endGame();
-            stopScoring(); // Lopeta peli törmäyksen sattuessa
+             // Lopeta peli törmäyksen sattuessa
         } else if (obstacle.className === 'obstacle2' && isCollisionWithObstacle2(obstacle, player)) {
             endGame();
-            stopScoring(); // Lopeta peli törmäyksen sattuessa
+            // Lopeta peli törmäyksen sattuessa
         }
     });
 }
@@ -172,15 +180,6 @@ document.addEventListener('keydown', function(event) {
         jump(); // Suorita hyppy
     }
 });
-
-function startGame() {
-    if (gameRunning) return; // Estä pelin käynnistäminen uudelleen
-    gameRunning = true;
-    console.log('Peli käynnistetty!');
-    startButton.style.display = 'none'; // Piilotetaan "Aloita peli" -painike
-    resetPlayer(); // Palauta pelaaja alkuasentoon
-    startObstacleCreation(); // Aloitetaan esteiden luonti
-}
 
 function jump() {
     if (isJumping) return; // Estä hyppy, jos pelaaja on jo ilmassa
@@ -294,13 +293,13 @@ function startObstacleCreation() { // Muuttuja aikavälin summalle
     
     // Esimerkki esteiden luomisesta ja törmäystarkistuksesta
     function startObstacleCreation() {
-        const minInterval = 1000; // Minimum interval for obstacle creation (ms)
-        const maxInterval = 3500; // Maximum interval for obstacle creation (ms)
+        const minInterval = 2000; // Minimum interval for obstacle creation (ms)
+        const maxInterval = 4500; // Maximum interval for obstacle creation (ms)
     
         function createObstacles() {
             const randomType = Math.random() < 0.5 ? createObstacle1 : createObstacle2; // Satunnainen esteen tyyppi
             randomType(); // Luo este
-            const randomInterval = Math.max(2000, Math.floor(Math.random() * (maxInterval - minInterval) + minInterval)); // Varmista, että väli on vähintään 2000
+            const randomInterval = Math.max(2000, Math.floor(Math.random() * (maxInterval - minInterval))); // Varmista, että väli on vähintään 2000
             setTimeout(createObstacles, randomInterval); // Luo uusi este satunnaisessa ajassa
         }
     
